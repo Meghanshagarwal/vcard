@@ -34,6 +34,6 @@ export default defineConfig({
     }
   },
   define: {
-    __VITE_API_URL__: JSON.stringify(process.env.VITE_API_URL || 'https://vcard-backend-eight.vercel.app'),
+    'import.meta.env.VITE_API_URL': JSON.stringify('https://vcard-backend-eight.vercel.app'),
   },
 });
