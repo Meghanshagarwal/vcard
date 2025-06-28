@@ -4,6 +4,7 @@ import { resolve } from "path";
 
 export default defineConfig({
   plugins: [react()],
+  base: "./",
   resolve: {
     alias: {
       "@": resolve(__dirname, "./src"),
@@ -14,24 +15,25 @@ export default defineConfig({
     sourcemap: false,
     minify: false,
     chunkSizeWarningLimit: 1000,
-    rollupOptions: {
-      output: {
-        manualChunks(id) {
-          if (id.includes('node_modules')) {
-            if (id.includes('react')) {
-              return 'react-vendor';
-            }
-            if (id.includes('lucide')) {
-              return 'icons';
-            }
-            if (id.includes('@radix-ui')) {
-              return 'ui';
-            }
-            return 'vendor';
-          }
-        }
-      }
-    }
+    // ✅ Remove manualChunks to avoid React runtime break
+    // rollupOptions: {
+    //   output: {
+    //     manualChunks(id) {
+    //       if (id.includes('node_modules')) {
+    //         if (id.includes('react')) {
+    //           return 'react-vendor';
+    //         }
+    //         if (id.includes('lucide')) {
+    //           return 'icons';
+    //         }
+    //         if (id.includes('@radix-ui')) {
+    //           return 'ui';
+    //         }
+    //         return 'vendor';
+    //       }
+    //     }
+    //   }
+    // }
   },
   define: {
     'import.meta.env.VITE_API_URL': JSON.stringify('https://vcard-backend-eight.vercel.app'),
